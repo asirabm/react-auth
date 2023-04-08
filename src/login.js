@@ -2,23 +2,17 @@ import React,{useState} from 'react'
 import { Form, Button } from "react-bootstrap";
 
 
-function Register() {
+function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [register, setRegister] = useState(false);
 
-    function SubmitHandler(e){
-      
-      e.preventDefault();
-      alert("Submited");
-    }
-
   return (
     <>
-       <h2>Register</h2>
+       <h2>Login</h2>
       <Form>
         {/* email */}
-        <Form.Group onSubmit={(e)=>SubmitHandler(e)} controlId="formBasicEmail">
+        <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control 
           type="email"
@@ -35,13 +29,14 @@ function Register() {
           type="password"
           name="password"
           value={password}
-          placeholder="Password" 
           onChange={(e=>setPassword(e.target.value))}
+        
+          placeholder="Password" 
           />
         </Form.Group>
 
         {/* submit button */}
-        <Button variant="primary" type="submit" onClick={(e) => SubmitHandler(e)}>
+        <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>
@@ -51,4 +46,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Login
