@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 
 function Register() {
@@ -8,9 +9,16 @@ function Register() {
     const [register, setRegister] = useState(false);
 
     function SubmitHandler(e){
-      
       e.preventDefault();
-      alert("Submited");
+      const configuration = {
+        method: "post",
+        url: "http://localhost:4000/register",
+        data: {
+          email,
+          password,
+        }}
+      axios(configuration).then((res)=>setRegister(true))
+      .catch(err=>console.log(err))
     }
 
   return (
@@ -45,6 +53,11 @@ function Register() {
           Submit
         </Button>
       </Form>
+      {register ? (
+          <p className="text-success">You Are Registered Successfully</p>
+        ) : (
+          <p className="text-danger">You Are Not Registered</p>
+        )}
 
     
     </>

@@ -1,18 +1,35 @@
 import React,{useState} from 'react'
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [register, setRegister] = useState(false);
+    const [login, setLogin] = useState(false);
+
+
+    const submitHandler=(e)=>{
+      e.preventDefault()
+      const configuration = {
+        method: "post",
+        url: "http://localhost:4000/login",
+        data: {
+          email,
+          password,
+        },
+      };
+      axios(configuration).then(res=>setLogin(true))
+      .catch(err=>console.log(err))
+
+    }
 
   return (
     <>
        <h2>Login</h2>
       <Form>
         {/* email */}
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group onSubmit={(e)=>{submitHandler(e)}} controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control 
           type="email"
@@ -36,10 +53,15 @@ function Login() {
         </Form.Group>
 
         {/* submit button */}
-        <Button variant="primary" type="submit">
+        <Button variant="primary" onClick={(e)=>{submitHandler(e)}} type="submit">
           Submit
         </Button>
       </Form>
+      {login ? (
+          <p className="text-success">You Are Logged in Successfully</p>
+        ) : (
+          <p className="text-danger">You Are Not Logged in</p>
+        )}
 
     
     </>
