@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 
 function Login() {
@@ -19,7 +21,18 @@ function Login() {
           password,
         },
       };
-      axios(configuration).then(res=>setLogin(true))
+      axios(configuration).then(res=>{
+        setLogin(true)
+        cookies.set("TOKEN", res.data.token, {
+          path: "/",
+        });
+      
+      window.location.href = "/auth";
+
+       
+      }
+      
+      )
       .catch(err=>console.log(err))
 
     }
