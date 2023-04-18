@@ -3,7 +3,7 @@ import './App.css';
 import Register from './Register';
 import Login from './login';
 import { Container, Col, Row } from "react-bootstrap";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
 import FreeComponent from './FreeComponent'
 import AuthComponent from './AuthComponent'
 import Account from './Account';
@@ -17,20 +17,20 @@ function App() {
           <h1>React Authentication Tutorial</h1>
 
           <section id="navigation">
-            <a href="/">Home</a>
-            <a href="/free">Free Component</a>
-            <a href="/auth">Auth Component</a>
+            <Link to="/">Home</Link>
+            <Link to="/free">Free Component</Link>
+            <Link to="/auth">Auth Component</Link>
           </section>
         </Col>
       </Row>
 
-
+    
    <Routes>
-        <Route exact path="/" component={Account} />
-        <Route exact path="/free" component={FreeComponent} />
-        <Route exact path="/auth" component={AuthComponent} />
+        <Route index element={<Account/>} />
+        <Route path="/free" element={<FreeComponent/>} />
+        <Route path="/auth" element={<AuthComponent/>} />
       </Routes>
-       
+     
       
     </Container>
 

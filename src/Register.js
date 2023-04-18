@@ -17,7 +17,10 @@ function Register() {
           email,
           password,
         }}
-      axios(configuration).then((res)=>setRegister(true))
+      axios(configuration).then((res)=>{
+        setRegister(true)
+      console.log('Hello')
+      })
       .catch(err=>console.log(err))
     }
 
